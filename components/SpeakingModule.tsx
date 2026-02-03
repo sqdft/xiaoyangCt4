@@ -1,14 +1,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { ExamLevel } from '../types';
+import { ExamLevel, ApiKeyConfig } from '../types';
 import { getGeminiClient } from '../services/gemini';
 import { Modality, LiveServerMessage } from '@google/genai';
 
 interface SpeakingModuleProps {
   level: ExamLevel;
+  apiConfig?: ApiKeyConfig | null;
+  onOpenApiManager: () => void;
 }
 
-const SpeakingModule: React.FC<SpeakingModuleProps> = ({ level }) => {
+const SpeakingModule: React.FC<SpeakingModuleProps> = ({ level, apiConfig, onOpenApiManager }) => {
   const [isActive, setIsActive] = useState(false);
   const [status, setStatus] = useState('点击开始口语模拟练习');
   const sessionRef = useRef<any>(null);
@@ -17,6 +19,12 @@ const SpeakingModule: React.FC<SpeakingModuleProps> = ({ level }) => {
   const sourcesRef = useRef(new Set<AudioBufferSourceNode>());
 
   const startConversation = async () => {
+    if (!apiConfig) {
+      alert("请先配置API Key才能使用AI口语练习功能");
+      onOpenApiManager();
+      return;
+    }
+
     try {
       const ai = getGeminiClient();
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });

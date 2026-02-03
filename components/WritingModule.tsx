@@ -1,11 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
-import { WritingAnalysis, WritingPrompt } from '../types';
+import { WritingAnalysis, WritingPrompt, ApiKeyConfig } from '../types';
 import { analyzeWriting } from '../services/gemini';
 import { getRandomPrompt } from '../services/prompts';
 import { WRITING_TEMPLATES, HIGH_SCORE_SENTENCES, WRITING_SKILLS } from '../services/references';
 
-const WritingModule: React.FC = () => {
+interface WritingModuleProps {
+  apiConfig?: ApiKeyConfig | null;
+  onOpenApiManager: () => void;
+}
+
+const WritingModule: React.FC<WritingModuleProps> = ({ apiConfig, onOpenApiManager }) => {
   const [text, setText] = useState('');
   const [analysis, setAnalysis] = useState<WritingAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
@@ -26,6 +31,12 @@ const WritingModule: React.FC = () => {
   };
 
   const handleAnalyze = async () => {
+    if (!apiConfig) {
+      alert("请先配置API Key才能使用AI分析功能");
+      onOpenApiManager();
+      return;
+    }
+
     if (!text.trim() || text.split(/\s+/).length < 20) {
       alert("请至少输入20个单词。");
       return;
@@ -41,7 +52,7 @@ const WritingModule: React.FC = () => {
       
     } catch (error) {
       console.error(error);
-      alert("分析失败。");
+      alert("分析失败，请检查API配置是否正确");
     } finally {
       setLoading(false);
     }
