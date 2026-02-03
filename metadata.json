@@ -1,0 +1,7 @@
+{
+  "name": "CET Mastery AI",
+  "description": "A comprehensive mobile-friendly English learning app specifically designed for CET-4 and CET-6 exam preparation, featuring AI-powered speaking practice, writing analysis, and vocabulary training.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
