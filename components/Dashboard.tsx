@@ -4,9 +4,10 @@ import { AppTab } from '../types';
 
 interface DashboardProps {
   onNavigate: (tab: AppTab) => void;
+  onOpenApiManager: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onNavigate, onOpenApiManager }) => {
   const [stats, setStats] = useState({ words: 0, writings: 0 });
 
   useEffect(() => {
@@ -86,9 +87,18 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-bold text-slate-800 flex items-center gap-2 px-1">
-          <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full"></span> 备考专项计划
-        </h3>
+        <div className="flex items-center justify-between px-1">
+          <h3 className="font-bold text-slate-800 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full"></span> 备考专项计划
+          </h3>
+          <button
+            onClick={onOpenApiManager}
+            className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full text-xs font-medium hover:bg-slate-200 transition-colors flex items-center gap-1"
+          >
+            <i className="fas fa-key text-xs"></i>
+            API设置
+          </button>
+        </div>
         <div className="grid grid-cols-1 gap-4">
           {recommendations.map((item, idx) => (
             <div 

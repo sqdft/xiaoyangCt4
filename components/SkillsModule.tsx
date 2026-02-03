@@ -72,7 +72,7 @@ const SkillsModule: React.FC = () => {
     <div className="space-y-6 animate-fadeIn pb-10">
       <div className="bg-white p-6 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center gap-4">
          <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center shrink-0 border-2 border-indigo-100">
-           <i className="fas fa-sheep text-3xl text-indigo-600"></i>
+           <i className="fas fa-graduation-cap text-3xl text-indigo-600"></i>
          </div>
          <div className="flex-1">
            <h3 className="text-lg font-black text-slate-800 tracking-tight">小羊老师提分笔记</h3>
@@ -223,7 +223,7 @@ const SkillsModule: React.FC = () => {
             <span className="text-amber-300 font-bold">新增亮点：</span> 35个万能开头 + 40个逻辑衔接 + 30个精彩结尾 + 50个高分词汇，助你从15分冲刺到25分！
           </p>
         </div>
-        <i className="fas fa-sheep absolute -right-10 -bottom-10 text-white/5 text-[15rem]"></i>
+        <i className="fas fa-graduation-cap absolute -right-10 -bottom-10 text-white/5 text-[15rem]"></i>
       </div>
     </div>
   );

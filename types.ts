@@ -9,6 +9,21 @@ export enum AppTab {
   SKILLS = 'skills' // 新增锦囊选项
 }
 
+export interface ApiProvider {
+  id: string;
+  name: string;
+  baseUrl?: string;
+  keyFormat: string;
+  description: string;
+}
+
+export interface ApiKeyConfig {
+  provider: string;
+  apiKey: string;
+  baseUrl?: string;
+  isActive: boolean;
+}
+
 export interface Word {
   word: string;
   phonetic: string;
